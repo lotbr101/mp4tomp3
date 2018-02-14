@@ -10,7 +10,7 @@ FILENAME - name of the file for processing"
   (let ((wavname (format "%s.wav" (file-name-sans-extension fileName))))
     (concat (format "mplayer -vo null -ao pcm:file=\"%s\" \"%s\"\n" wavname fileName)
             (format "lame \"%s\" --preset standard \n" wavname)
-            ;;; (format "rm \"%s\"\n" wavname)
+            (format "rm \"%s\"\n" wavname)
             )))
 
 (defun mp4tomp3-files (directory)
@@ -19,6 +19,8 @@ DIRECTORY - directory with files for processing"
   (cl-remove-if (lambda (x)
                   (cond ((string= ".." x)t)
                         ((string= "." x) t)
+			((string= ".directory" x) t)
+			((not (member (file-name-extension x) '("mp3" "mp4" "ogg" "wav" "webm"))) t)
                         (t nil)
                         ))
                 (directory-files directory)))
@@ -37,7 +39,5 @@ DIRSRC - source directory"
       (save-buffer)
       (kill-buffer))))
 
-
-  
 (provide 'mp4tomp3)
 ;;; mp4tomp3 ends here
