@@ -20,7 +20,7 @@ DIRECTORY - directory with files for processing"
                   (cond ((string= ".." x)t)
                         ((string= "." x) t)
                         ((string= ".directory" x) t)
-                        ((not (member (downcase  (file-name-extension x)) '("mp3" "mp4" "ogg" "wav" "webm"))) t)
+                        ((not (member (downcase  (file-name-extension x)) '("mp3" "mp4" "ogg" "wav" "webm" "m4a"))) t)
                         (t nil)
                         ))
                 (directory-files directory)))
